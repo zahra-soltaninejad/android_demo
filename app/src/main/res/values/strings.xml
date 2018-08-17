@@ -23,5 +23,14 @@
     <string name="registered_emailid">Please enter your Registered Email Id below:</string>
     <string name="submit">SUBMIT</string>
     <string name="back">BACK</string>
+    <string name="add_check">cfsfmls</string>
+    <string name="new_check">صدور چک</string>
+    <string name="view_checkBook_state">مشاهده دسته چک</string>
+    <string name="view_recieved_check">مشاهده چک های دریافتی</string>
+    <string name="reminder">یاد آور</string>
+    <string name="setting">تنظیمات</string>
+    <string name="view_request">مشاهده درخواست ها</string>
+    <string name="exit">خروج</string>
+    <string name="guid">راهنما</string>
 
 </resources>
