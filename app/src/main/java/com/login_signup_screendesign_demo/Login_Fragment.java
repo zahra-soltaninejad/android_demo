@@ -1,9 +1,12 @@
 package com.login_signup_screendesign_demo;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.login_signup_screendesign_demo.R;
+import com.login_signup_screendesign_demo.config.ServerConfig;
+import com.login_signup_screendesign_demo.dto.ResponseDTO;
+import com.login_signup_screendesign_demo.enums.ResponseStatus;
+import com.login_signup_screendesign_demo.ws.JsonHelper;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -27,15 +30,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import cz.msebera.android.httpclient.Header;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class Login_Fragment extends Fragment implements OnClickListener {
-	private static View view;
+public class Login_Fragment extends Fragment implements OnClickListener{
+		private static View view;
 
 	private static EditText emailid, password;
 	private static Button loginButton;
@@ -162,7 +166,42 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
 	// Check Validation before login
 	private void checkValidation() {
-		// Get email id and password
+
+        final JsonHelper jsonHelper = new JsonHelper();
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        params.put("user", emailid.getText());
+        params.put("pass", password.getText());
+
+        client.get(ServerConfig.SERVER_ADRESS+"/security/login", params, new TextHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String res) {
+                        ResponseDTO responseDTO = jsonHelper.getResponse(res);
+                        if (responseDTO.getStatus().equals(ResponseStatus.OK)){
+                            Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT)
+                                    .show();
+                        }else {
+                            new CustomToast().Show_Toast(getActivity(), view, responseDTO.getMessage());
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+                        new CustomToast().Show_Toast(getActivity(), view, "Cannot Login");
+                    }
+                }
+        );
+		/*new HttpGetRequest().execute(ServerConfig.SERVER_ADRESS+"/security/login?user="+emailid.getText()+"&pass="+password.getText());
+		while (true){
+			if (TemplateHolder.getInstance().getResult() != null){
+                new CustomToast().Show_Toast(getActivity(), view, TemplateHolder.getInstance().getResult());
+			}
+		}*/
+		//new HttpGetRequest().execute("http://192.168.43.70:8081/security/login");
+		/*// Get email id and password
 		String getEmailId = emailid.getText().toString();
 		String getPassword = password.getText().toString();
 
@@ -186,7 +225,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 		// Else do login and do your stuff
 		else
 			Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
-					.show();
+					.show();*/
 
 	}
+
 }
