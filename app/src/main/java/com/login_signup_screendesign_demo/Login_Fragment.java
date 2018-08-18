@@ -3,7 +3,10 @@ package com.login_signup_screendesign_demo;
 import java.io.UnsupportedEncodingException;
 
 import com.login_signup_screendesign_demo.config.ServerConfig;
+import com.login_signup_screendesign_demo.dto.PersonDTO;
+import com.login_signup_screendesign_demo.dto.ResponseDTO;
 import com.login_signup_screendesign_demo.dto.UserDTO;
+import com.login_signup_screendesign_demo.enums.ResponseStatus;
 import com.login_signup_screendesign_demo.ws.JsonHelper;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -148,8 +151,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			Intent intent = new Intent(getActivity(),MainMenu.class);
-			startActivity(intent);
 			break;
 
 //		case R.id.forgot_password:
@@ -181,46 +182,29 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 		final JsonHelper jsonHelper = new JsonHelper();
 		AsyncHttpClient client = new AsyncHttpClient();
 
-		// TODO: 8/18/2018 don't remove this!!! its for post action
-		StringEntity entity = new StringEntity(jsonHelper.generateRequest(new UserDTO("admin" , "admin123")));
+		StringEntity entity = new StringEntity(jsonHelper.generateRequest(new UserDTO( emailid.getText().toString() , password.getText().toString())));
 		entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 		client.post(view.getContext() , ServerConfig.SERVER_ADRESS +"/security/userLogin", entity, "application/json", new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-				System.out.println("-----");
+				String json = new String(responseBody);
+				ResponseDTO<PersonDTO> person = jsonHelper.getPersonResponse(json);
+				if (person.getStatus().equals(ResponseStatus.OK)){
+					Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT)
+							.show();
+					Intent intent = new Intent(getActivity(),MainMenu.class);
+					startActivity(intent);
+				}else{
+					new CustomToast().Show_Toast(getActivity(), view,
+							ErrorMassage.invalidUserName);
+				}
+
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+				new CustomToast().Show_Toast(getActivity(), view, "Cannot login!");
 			}
 		});
 	}
-
-
-		/*// Get email id and password
-		String getEmailId = emailid.getText().toString();
-		String getPassword = password.getText().toString();
-
-		// Check patter for email id
-		Pattern p = Pattern.compile(Utils.regEx);
-
-		Matcher m = p.matcher(getEmailId);
-
-		// Check for both field is empty or not
-		if (getEmailId.equals("") || getEmailId.length() == 0
-				|| getPassword.equals("") || getPassword.length() == 0) {
-			loginLayout.startAnimation(shakeAnimation);
-			new CustomToast().Show_Toast(getActivity(), view,
-					"Enter both credentials.");
-
-		}
-		// Check if email id is valid or not
-		else if (!m.find())
-			new CustomToast().Show_Toast(getActivity(), view,
-					ErrorMassage.invalidUserName);
-		// Else do login and do your stuff
-		else
-			Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
-					.show();*/
-
 
 }
