@@ -1,10 +1,12 @@
 package com.login_signup_screendesign_demo;
 
 import com.login_signup_screendesign_demo.config.ServerConfig;
+import com.login_signup_screendesign_demo.dto.PersonDTO;
 import com.login_signup_screendesign_demo.dto.ResponseDTO;
 import com.login_signup_screendesign_demo.enums.ResponseStatus;
 import com.login_signup_screendesign_demo.ws.JsonHelper;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -35,7 +37,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Login_Fragment extends Fragment implements OnClickListener{
@@ -138,8 +145,12 @@ public class Login_Fragment extends Fragment implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.loginBtn:
-			checkValidation();
-			break;
+            try {
+                checkValidation();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            break;
 
 //		case R.id.forgot_password:
 //
@@ -165,7 +176,7 @@ public class Login_Fragment extends Fragment implements OnClickListener{
 	}
 
 	// Check Validation before login
-	private void checkValidation() {
+	private void checkValidation() throws UnsupportedEncodingException {
 
         final JsonHelper jsonHelper = new JsonHelper();
         AsyncHttpClient client = new AsyncHttpClient();
@@ -174,7 +185,7 @@ public class Login_Fragment extends Fragment implements OnClickListener{
         params.put("user", emailid.getText());
         params.put("pass", password.getText());
 
-        client.get(ServerConfig.SERVER_ADRESS+"/security/login", params, new TextHttpResponseHandler() {
+        client.get(ServerConfig.SERVER_ADDRESS +"/security/login", params, new TextHttpResponseHandler() {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {
@@ -194,7 +205,26 @@ public class Login_Fragment extends Fragment implements OnClickListener{
                     }
                 }
         );
-		/*new HttpGetRequest().execute(ServerConfig.SERVER_ADRESS+"/security/login?user="+emailid.getText()+"&pass="+password.getText());
+
+		// TODO: 8/18/2018 don't remove this!!! its for post action
+		/*StringEntity entity = new StringEntity(jsonHelper.setRequest(new PersonDTO()));
+		entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+		client.post(view.getContext() , ServerConfig.SERVER_ADDRESS +"/check/addPerson", entity, "application/json", new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+				System.out.println("-----");
+			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+			}
+		});*/
+
+
+		/*new HttpGetRequest().execute(ServerConfig.SERVER_ADDRESS+"/security/login?user="+emailid.getText()+"&pass="+password.getText());
 		while (true){
 			if (TemplateHolder.getInstance().getResult() != null){
                 new CustomToast().Show_Toast(getActivity(), view, TemplateHolder.getInstance().getResult());

@@ -21,4 +21,10 @@ public class JsonHelper {
         Gson gson = new Gson();
         return gson.fromJson(json , ResponseDTO.class);
     }
+
+    public String setRequest(PersonDTO personDTO){
+
+        Gson gson = new Gson();
+        return gson.toJson(personDTO , PersonDTO.class);
+    }
 }
