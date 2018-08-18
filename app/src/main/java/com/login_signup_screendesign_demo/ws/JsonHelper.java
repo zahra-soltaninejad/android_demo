@@ -8,6 +8,7 @@ import com.login_signup_screendesign_demo.dto.ReceiverAccountDTO;
 import com.login_signup_screendesign_demo.dto.ReceiverDTO;
 import com.login_signup_screendesign_demo.dto.ResponseDTO;
 import com.login_signup_screendesign_demo.dto.SenderDTO;
+import com.login_signup_screendesign_demo.dto.UserDTO;
 
 /**
  * Created by Mobina on 8/15/2018.
@@ -51,7 +52,7 @@ public class JsonHelper {
         Gson gson = new Gson();
         return gson.fromJson(json , ResponseDTO.class);
     }
-    //sender checks-------------------------------------------------------
+    //sender checks---------------------------------------------------------
     public String generateRequest(SenderDTO senderDTO){
 
         Gson gson = new Gson();
@@ -63,8 +64,20 @@ public class JsonHelper {
         Gson gson = new Gson();
         return gson.fromJson(json , ResponseDTO.class);
     }
-    //response dto in general
+    //response dto in general------------------------------------------------
     public ResponseDTO<ResponseDTO> getResponse(String json){
+
+        Gson gson = new Gson();
+        return gson.fromJson(json , ResponseDTO.class);
+    }
+    //user-------------------------------------------------------------------
+    public String generateRequest(UserDTO userDTO){
+
+        Gson gson = new Gson();
+        return gson.toJson(userDTO , UserDTO.class);
+    }
+
+    public ResponseDTO<ResponseDTO<PersonDTO>> getLoginResponse(String json){
 
         Gson gson = new Gson();
         return gson.fromJson(json , ResponseDTO.class);

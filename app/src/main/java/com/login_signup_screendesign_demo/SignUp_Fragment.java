@@ -1,5 +1,6 @@
 package com.login_signup_screendesign_demo;
 
+import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,7 +88,11 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 		case R.id.already_user:
 
 			// Replace login fragment
-			new MainActivity().replaceLoginFragment();
+			try {
+				new MainActivity().replaceLoginFragment();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			break;
 		}
 

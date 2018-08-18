@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import java.io.UnsupportedEncodingException;
+
 public class MainActivity extends Activity {
 	private static FragmentManager fragmentManager;
 
@@ -27,10 +29,14 @@ public class MainActivity extends Activity {
 
 		// If savedinstnacestate is null then replace login fragment
 		if (savedInstanceState == null) {
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.frameContainer, new Login_Fragment(),
-							Utils.Login_Fragment).commit();
+			try {
+				fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameContainer, new Login_Fragment(),
+                                Utils.Login_Fragment).commit();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
 
 		// On close icon click finish activity
@@ -48,7 +54,7 @@ public class MainActivity extends Activity {
 
 	// Replace Login Fragment with animation
 	@SuppressLint({"NewApi", "ResourceType"})
-	protected void replaceLoginFragment() {
+	protected void replaceLoginFragment() throws UnsupportedEncodingException {
 		fragmentManager
 				.beginTransaction()
 				.setCustomAnimations(R.anim.left_enter, R.anim.right_out)
@@ -71,9 +77,17 @@ public class MainActivity extends Activity {
 		// task
 
 		if (SignUp_Fragment != null)
-			replaceLoginFragment();
+			try {
+				replaceLoginFragment();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		else if (ForgotPassword_Fragment != null)
-			replaceLoginFragment();
+			try {
+				replaceLoginFragment();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		else
 			super.onBackPressed();
 	}

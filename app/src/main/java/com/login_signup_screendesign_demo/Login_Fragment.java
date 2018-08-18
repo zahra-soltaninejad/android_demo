@@ -1,14 +1,18 @@
 package com.login_signup_screendesign_demo;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.UnsupportedEncodingException;
 
-import com.login_signup_screendesign_demo.R;
+import com.login_signup_screendesign_demo.config.ServerConfig;
+import com.login_signup_screendesign_demo.dto.UserDTO;
+import com.login_signup_screendesign_demo.ws.JsonHelper;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Build;
@@ -31,7 +35,12 @@ import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Login_Fragment extends Fragment implements OnClickListener {
@@ -45,7 +54,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 	private static Animation shakeAnimation;
 	private static FragmentManager fragmentManager;
 
-	public Login_Fragment() {
+	public Login_Fragment() throws UnsupportedEncodingException {
 
 	}
 
@@ -134,7 +143,13 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.loginBtn:
-			checkValidation();
+			try {
+				checkValidation();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			Intent intent = new Intent(getActivity(),MainMenu.class);
+			startActivity(intent);
 			break;
 
 //		case R.id.forgot_password:
@@ -161,8 +176,27 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 	}
 
 	// Check Validation before login
-	private void checkValidation() {
-		// Get email id and password
+	private void checkValidation() throws UnsupportedEncodingException {
+
+		final JsonHelper jsonHelper = new JsonHelper();
+		AsyncHttpClient client = new AsyncHttpClient();
+
+		// TODO: 8/18/2018 don't remove this!!! its for post action
+		StringEntity entity = new StringEntity(jsonHelper.generateRequest(new UserDTO("admin" , "admin123")));
+		entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+		client.post(view.getContext() , ServerConfig.SERVER_ADRESS +"/security/userLogin", entity, "application/json", new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+				System.out.println("-----");
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+			}
+		});
+	}
+
+
+		/*// Get email id and password
 		String getEmailId = emailid.getText().toString();
 		String getPassword = password.getText().toString();
 
@@ -186,7 +220,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 		// Else do login and do your stuff
 		else
 			Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
-					.show();
+					.show();*/
 
-	}
+
 }

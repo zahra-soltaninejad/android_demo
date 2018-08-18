@@ -6,5 +6,5 @@ package com.login_signup_screendesign_demo.config;
 
 public class ServerConfig {
 
-    public static final String SERVER_ADRESS = "http://192.168.1.53:8081";
+    public static final String SERVER_ADRESS = "http://192.168.1.51:8081";
 }

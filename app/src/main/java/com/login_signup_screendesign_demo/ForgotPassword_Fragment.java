@@ -1,5 +1,6 @@
 package com.login_signup_screendesign_demo;
 
+import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,7 +74,11 @@ public class ForgotPassword_Fragment extends Fragment implements
 		case R.id.backToLoginBtn:
 
 			// Replace Login Fragment on Back Presses
-			new MainActivity().replaceLoginFragment();
+			try {
+				new MainActivity().replaceLoginFragment();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			break;
 
 		case R.id.forgot_button:
