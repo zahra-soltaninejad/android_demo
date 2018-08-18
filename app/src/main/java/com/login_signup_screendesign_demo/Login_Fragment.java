@@ -9,7 +9,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Build;
@@ -136,8 +135,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.loginBtn:
 			checkValidation();
-			Intent intent = new Intent(getActivity(),MainMenu.class);
-			startActivity(intent);
 			break;
 
 //		case R.id.forgot_password:
