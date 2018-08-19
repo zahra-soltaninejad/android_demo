@@ -32,5 +32,14 @@
     <string name="view_request">مشاهده درخواست ها</string>
     <string name="exit">خروج</string>
     <string name="guid">راهنما</string>
+    <string name="add_new_check">صدور چک جدید</string>
+    <string name="check_book_state">وضعیت دسته چک</string>
+    <string name="previous_page">صفحه قبلی</string>
+    <string name="SID">کد فرستنده</string>
+    <string name="sign_code">امضا اختصاصی </string>
+    <string name="check_amount">مبلغ چک</string>
+    <string name="vosoul_date">تاریخ وصول</string>
+    <string name="RID">کد گیرنده</string>
+    <string name="sending_check_info">ارسال درخواست</string>
 
 </resources>

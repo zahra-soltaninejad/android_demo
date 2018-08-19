@@ -47,13 +47,13 @@ import cz.msebera.android.httpclient.protocol.HTTP;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Login_Fragment extends Fragment implements OnClickListener {
-	private static View view;
+	private  View view;
 
-	private static EditText emailid, password;
-	private static Button loginButton;
+	private  EditText emailid, password;
+	private  Button loginButton;
 //	private static TextView forgotPassword, signUp;
-	private static CheckBox show_hide_password;
-	private static LinearLayout loginLayout;
+	private  CheckBox show_hide_password;
+	private  LinearLayout loginLayout;
 	private static Animation shakeAnimation;
 	private static FragmentManager fragmentManager;
 

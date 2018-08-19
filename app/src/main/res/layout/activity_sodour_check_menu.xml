@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu"
+    tools:context=".SodourCheckMenu"
     android:background="@color/background_color">
+
 
 
     <LinearLayout
@@ -17,56 +18,25 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/sodour_check"
+            android:id="@+id/sodour_check_jadid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/new_check"
+            android:text="@string/add_new_check"
             android:background="@color/white_greyish"
             android:textColor="@color/background_color"
 
             />
 
         <Button
-            android:id="@+id/view_checkbook_state"
+            android:id="@+id/check_book_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/view_checkBook_state"
-            />
-        <Button
-            android:id="@+id/view_received_checks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/view_recieved_check"
+            android:text="@string/check_book_state"
+            android:background="@color/white_greyish"
+            android:textColor="@color/background_color"/>
 
-            />
-        <Button
-            android:id="@+id/reminder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/reminder"
-
-            />
-
-        <Button
-            android:id="@+id/view_requests"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/view_request"
-
-            />
-        <Button
-            android:id="@+id/setting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/setting"
-
-            />
     </LinearLayout>
 
     <LinearLayout
@@ -79,15 +49,23 @@
         >
 
         <Button
+
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="@string/exit" />
         <Button
+
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="@string/guid" />
+        <Button
+
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/previous_page" />
     </LinearLayout>
 
 
