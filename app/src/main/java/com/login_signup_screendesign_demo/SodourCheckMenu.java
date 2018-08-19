@@ -11,11 +11,16 @@ public class SodourCheckMenu extends AppCompatActivity implements View.OnClickLi
 
     private static Button sodourButton;
     private ExpandableListView elvChapters;
+    Button exitbtn;
+    Button backbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sodour_check_menu);
         sodourButton=(Button)findViewById(R.id.sodour_check_jadid);
+        exitbtn=(Button)findViewById(R.id.exit);
+        backbtn=(Button)findViewById(R.id.back);
+
         sodourButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -23,6 +28,19 @@ public class SodourCheckMenu extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
             }
         }));
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        exitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                System.exit(0);
+            }
+        });
 
     }
     @Override

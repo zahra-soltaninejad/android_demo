@@ -18,6 +18,7 @@ public class sodourNewCheck extends AppCompatActivity implements
     EditText checkAmountEditText;
     EditText RID;
     Button sendRequestButton;
+    Button exit;
 
 
 
@@ -45,6 +46,12 @@ public class sodourNewCheck extends AppCompatActivity implements
                 dateGeneration(sodourDate);
             }
         }));
+        sendRequestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 

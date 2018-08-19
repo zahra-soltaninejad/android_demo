@@ -49,23 +49,29 @@
         >
 
         <Button
-
+            android:id="@+id/exit"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/exit" />
+            android:text="@string/exit"
+            android:background="@color/white_greyish"
+            android:textColor="@color/background_color"/>
         <Button
 
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/guid" />
+            android:text="@string/guid"
+            android:background="@color/white_greyish"
+            android:textColor="@color/background_color"/>
         <Button
-
+            android:id="@+id/back"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/previous_page" />
+            android:text="@string/previous_page"
+            android:background="@color/white_greyish"
+            android:textColor="@color/background_color"/>
     </LinearLayout>
 
 
