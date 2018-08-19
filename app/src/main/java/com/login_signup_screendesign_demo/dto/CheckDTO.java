@@ -1,6 +1,7 @@
 package com.login_signup_screendesign_demo.dto;
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class CheckDTO {
@@ -15,6 +16,7 @@ public class CheckDTO {
     private boolean hasLabel;
     private int editedTime;
     private String comment;
+    private BigDecimal amount;
 
     public String getrId() {
         return rId;
@@ -95,4 +97,13 @@ public class CheckDTO {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 }
+

@@ -8,6 +8,7 @@ import com.login_signup_screendesign_demo.dto.ResponseDTO;
 import com.login_signup_screendesign_demo.dto.UserDTO;
 import com.login_signup_screendesign_demo.enums.ResponseStatus;
 import com.login_signup_screendesign_demo.ws.JsonHelper;
+import com.login_signup_screendesign_demo.ws.TemplateHolder;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -146,13 +147,11 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.loginBtn:
-			Intent intent = new Intent(getActivity(),MainMenu.class);
-			startActivity(intent);
-//			try {
-//				checkValidation();
-//			} catch (UnsupportedEncodingException e) {
-//				e.printStackTrace();
-//			}
+			try {
+				checkValidation();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			break;
 
 //		case R.id.forgot_password:
@@ -192,10 +191,11 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 				String json = new String(responseBody);
 				ResponseDTO<PersonDTO> person = jsonHelper.getPersonResponse(json);
 				if (person.getStatus().equals(ResponseStatus.OK)){
-					Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT)
+					//TemplateHolder.getInstance().setPersonDTO((PersonDTO)person.getResponseObject());
+					Toast.makeText(getActivity(), " خوش آمدید", Toast.LENGTH_SHORT)
 							.show();
-//					Intent intent = new Intent(getActivity(),MainMenu.class);
-//					startActivity(intent);
+					Intent intent = new Intent(getActivity(),MainMenu.class);
+					startActivity(intent);
 				}else{
 					new CustomToast().Show_Toast(getActivity(), view,
 							ErrorMassage.invalidUserName);
@@ -204,7 +204,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-				new CustomToast().Show_Toast(getActivity(), view, "Cannot login!");
+				new CustomToast().Show_Toast(getActivity(), view, "خطا در ورود  به سیستم");
 			}
 		});
 	}

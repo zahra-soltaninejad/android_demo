@@ -8,7 +8,22 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.login_signup_screendesign_demo.config.ServerConfig;
+import com.login_signup_screendesign_demo.dto.CheckDTO;
+import com.login_signup_screendesign_demo.dto.ReceiverDTO;
+import com.login_signup_screendesign_demo.dto.ResponseDTO;
+import com.login_signup_screendesign_demo.enums.ResponseStatus;
+import com.login_signup_screendesign_demo.ws.JsonHelper;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
+
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 public class sodourNewCheck extends AppCompatActivity implements
         View.OnClickListener {
@@ -48,8 +63,44 @@ public class sodourNewCheck extends AppCompatActivity implements
         }));
         sendRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                finish();
+            public void onClick(final View view) {
+                CheckDTO checkDTO = new CheckDTO();
+                /*checkDTO.setDate(new Date(sodourDate.getText().toString()));
+                checkDTO.setVosolDate(new Date(sodourDate.getText().toString()));
+                checkDTO.setrId(RID.getText().toString());
+                checkDTO.setAmount(new BigDecimal(checkAmountEditText.getText().toString()));*/
+                checkDTO.setPassedYet(false);
+                checkDTO.setRAccepted(false);
+                checkDTO.setSAccepted(true);
+                final JsonHelper jsonHelper = new JsonHelper();
+                AsyncHttpClient client = new AsyncHttpClient();
+
+                StringEntity entity = null;
+                try {
+                    entity = new StringEntity(jsonHelper.generateRequest(checkDTO));
+                    entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                    client.post(view.getContext() , ServerConfig.SERVER_ADRESS +"/check/export", entity, "application/json", new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
+                            String json = new String(responseBody);
+                            ResponseDTO<ReceiverDTO> receiver = jsonHelper.getReceiverResponse(json);
+                            if (receiver.getStatus().equals(ResponseStatus.OK)){
+                                // receiver دریافت شده
+                            }else{
+                                new CustomToast().Show_Toast(view.getContext(), view,
+                                        receiver.getMessage());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
+
+                            new CustomToast().Show_Toast(view.getContext(), view, "خطا در دریافت اطلاعات");
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
