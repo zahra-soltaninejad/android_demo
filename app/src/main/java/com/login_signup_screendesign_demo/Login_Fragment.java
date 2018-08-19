@@ -146,11 +146,13 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.loginBtn:
-			try {
-				checkValidation();
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+			Intent intent = new Intent(getActivity(),MainMenu.class);
+			startActivity(intent);
+//			try {
+//				checkValidation();
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//			}
 			break;
 
 //		case R.id.forgot_password:
@@ -192,8 +194,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 				if (person.getStatus().equals(ResponseStatus.OK)){
 					Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT)
 							.show();
-					Intent intent = new Intent(getActivity(),MainMenu.class);
-					startActivity(intent);
+//					Intent intent = new Intent(getActivity(),MainMenu.class);
+//					startActivity(intent);
 				}else{
 					new CustomToast().Show_Toast(getActivity(), view,
 							ErrorMassage.invalidUserName);

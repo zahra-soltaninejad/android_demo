@@ -20,22 +20,6 @@
         />
 
     <EditText
-        android:id="@+id/SID"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:drawableRight="@drawable/user"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="@string/SID"
-        android:inputType="textCapWords"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp" />
-    <EditText
         android:id="@+id/sign_code"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -97,6 +81,22 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="16sp" />
+    <EditText
+        android:id="@+id/sodour_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawableRight="@drawable/date"
+        android:drawablePadding="8dp"
+        android:gravity="right"
+        android:hint="@string/sodour_date"
+        android:inputType="datetime"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/RID"
@@ -123,7 +123,7 @@
 
 
     <Button
-        android:id="@+id/signUpBtn"
+        android:id="@+id/send_requestbtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
