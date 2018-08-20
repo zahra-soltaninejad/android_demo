@@ -1,6 +1,8 @@
 package com.login_signup_screendesign_demo.ws;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.login_signup_screendesign_demo.dto.CheckBookDTO;
 import com.login_signup_screendesign_demo.dto.CheckDTO;
 import com.login_signup_screendesign_demo.dto.PersonDTO;
@@ -9,6 +11,9 @@ import com.login_signup_screendesign_demo.dto.ReceiverDTO;
 import com.login_signup_screendesign_demo.dto.ResponseDTO;
 import com.login_signup_screendesign_demo.dto.SenderDTO;
 import com.login_signup_screendesign_demo.dto.UserDTO;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * Created by Mobina on 8/15/2018.
@@ -25,8 +30,8 @@ public class JsonHelper {
 
     public ResponseDTO<PersonDTO> getPersonResponse(String json){
 
-        Gson gson = new Gson();
-        return gson.fromJson(json , ResponseDTO.class);
+        Type typeToken = new TypeToken<ResponseDTO<PersonDTO>>() { }.getType();
+        return new Gson().fromJson(json, typeToken);
     }
     //receiver-------------------------------------------------------
     public String generateRequest(CheckDTO checkDTO){
@@ -37,8 +42,8 @@ public class JsonHelper {
 
     public ResponseDTO<ReceiverDTO> getReceiverResponse(String json){
 
-        Gson gson = new Gson();
-        return gson.fromJson(json , ResponseDTO.class);
+        Type typeToken = new TypeToken<ResponseDTO<ReceiverDTO>>() { }.getType();
+        return new Gson().fromJson(json, typeToken);
     }
     //receiver account-------------------------------------------------------
     public String generateRequest(ReceiverDTO receiverDTO){
@@ -49,8 +54,8 @@ public class JsonHelper {
 
     public ResponseDTO<ResponseDTO<ReceiverAccountDTO>> getReceiverAccountResponse(String json){
 
-        Gson gson = new Gson();
-        return gson.fromJson(json , ResponseDTO.class);
+        Type typeToken = new TypeToken<ResponseDTO<ReceiverAccountDTO>>() { }.getType();
+        return new Gson().fromJson(json, typeToken);
     }
     //sender checks---------------------------------------------------------
     public String generateRequest(SenderDTO senderDTO){
@@ -61,8 +66,8 @@ public class JsonHelper {
 
     public ResponseDTO<ResponseDTO<CheckBookDTO>> getSenderCheckResponse(String json){
 
-        Gson gson = new Gson();
-        return gson.fromJson(json , ResponseDTO.class);
+        Type typeToken = new TypeToken<ResponseDTO<CheckBookDTO>>() { }.getType();
+        return new Gson().fromJson(json, typeToken);
     }
     //response dto in general------------------------------------------------
     public ResponseDTO<ResponseDTO> getResponse(String json){
@@ -75,11 +80,5 @@ public class JsonHelper {
 
         Gson gson = new Gson();
         return gson.toJson(userDTO , UserDTO.class);
-    }
-
-    public ResponseDTO<ResponseDTO<PersonDTO>> getLoginResponse(String json){
-
-        Gson gson = new Gson();
-        return gson.fromJson(json , ResponseDTO.class);
     }
 }

@@ -79,7 +79,7 @@ public class sodourNewCheck extends AppCompatActivity implements
                 try {
                     entity = new StringEntity(jsonHelper.generateRequest(checkDTO));
                     entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                    client.post(view.getContext() , ServerConfig.SERVER_ADDRESS +"/check/export", entity, "application/json", new AsyncHttpResponseHandler() {
+                    client.post(view.getContext() , ServerConfig.SERVER_ADRESS +"/check/export", entity, "application/json", new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
                             String json = new String(responseBody);
