@@ -65,10 +65,10 @@ public class sodourNewCheck extends AppCompatActivity implements
             @Override
             public void onClick(final View view) {
                 CheckDTO checkDTO = new CheckDTO();
-                /*checkDTO.setDate(new Date(sodourDate.getText().toString()));
+                checkDTO.setDate(new Date(sodourDate.getText().toString()));
                 checkDTO.setVosolDate(new Date(sodourDate.getText().toString()));
                 checkDTO.setrId(RID.getText().toString());
-                checkDTO.setAmount(new BigDecimal(checkAmountEditText.getText().toString()));*/
+                //checkDTO.setAmount(new BigDecimal(checkAmountEditText.getText().toString()));
                 checkDTO.setPassedYet(false);
                 checkDTO.setRAccepted(false);
                 checkDTO.setSAccepted(true);
@@ -79,7 +79,7 @@ public class sodourNewCheck extends AppCompatActivity implements
                 try {
                     entity = new StringEntity(jsonHelper.generateRequest(checkDTO));
                     entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                    client.post(view.getContext() , ServerConfig.SERVER_ADRESS +"/check/export", entity, "application/json", new AsyncHttpResponseHandler() {
+                    client.post(view.getContext() , ServerConfig.SERVER_ADDRESS +"/check/export", entity, "application/json", new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
                             String json = new String(responseBody);
@@ -120,7 +120,7 @@ public class sodourNewCheck extends AppCompatActivity implements
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
                     }
                 }, mYear, mMonth, mDay);

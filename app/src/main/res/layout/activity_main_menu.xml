@@ -20,9 +20,9 @@
             android:id="@+id/sodour_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/new_check"
-            android:background="@color/white_greyish"
+            android:layout_margin="10dp"
+            android:background="@drawable/loginbutton_selector"
             android:textColor="@color/background_color"
 
             />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/view_checkBook_state"
-            android:background="@color/white_greyish"
+            android:background="@drawable/loginbutton_selector"
             android:textColor="@color/background_color"
             />
         <Button
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/view_recieved_check"
-            android:background="@color/white_greyish"
+            android:background="@drawable/loginbutton_selector"
             android:textColor="@color/background_color"
 
             />
@@ -52,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/reminder"
-            android:background="@color/white_greyish"
+            android:background="@drawable/loginbutton_selector"
+
             android:textColor="@color/background_color"
 
             />
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/view_request"
-            android:background="@color/white_greyish"
+            android:background="@drawable/loginbutton_selector"
             android:textColor="@color/background_color"
 
             />
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/setting"
-            android:background="@color/white_greyish"
+            android:background="@drawable/loginbutton_selector"
             android:textColor="@color/background_color"
 
             />
@@ -93,14 +94,16 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="@string/exit"
-            android:background="@color/white_greyish"
+            android:layout_margin="5dp"
+            android:background="@drawable/loginbutton_selector"
             android:textColor="@color/background_color"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="@string/guid"
-            android:background="@color/white_greyish"
+            android:layout_margin="5dp"
+            android:background="@drawable/loginbutton_selector"
             android:textColor="@color/background_color"/>
     </LinearLayout>
 

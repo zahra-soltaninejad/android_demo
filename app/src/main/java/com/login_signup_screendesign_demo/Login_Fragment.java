@@ -185,7 +185,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
 		StringEntity entity = new StringEntity(jsonHelper.generateRequest(new UserDTO( emailid.getText().toString() , password.getText().toString())));
 		entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-		client.post(view.getContext() , ServerConfig.SERVER_ADRESS +"/security/userLogin", entity, "application/json", new AsyncHttpResponseHandler() {
+		client.post(view.getContext() , ServerConfig.SERVER_ADDRESS +"/security/userLogin", entity, "application/json", new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 				String json = new String(responseBody);

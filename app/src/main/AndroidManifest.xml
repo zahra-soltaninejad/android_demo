@@ -29,9 +29,10 @@
         </activity>
         <activity android:name=".MainMenu" />
         <activity android:name=".SodourCheckMenu" />
+        <activity android:name=".sodourNewCheck" />
         <activity
-            android:name=".sodourNewCheck"/>
-
+            android:name=".ws.ViewCheckBook"
+            android:label="@string/title_activity_view_check_book"></activity>
     </application>
 
 </manifest>

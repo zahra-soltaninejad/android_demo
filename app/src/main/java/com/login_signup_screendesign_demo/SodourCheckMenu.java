@@ -1,6 +1,8 @@
 package com.login_signup_screendesign_demo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,10 +39,32 @@ public class SodourCheckMenu extends AppCompatActivity implements View.OnClickLi
         exitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 finish();
-                System.exit(0);
+
             }
         });
+
+    }
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.app_name);
+        builder.setMessage("می خواهید از برنامه خارج شوید؟")
+                .setCancelable(false)
+                .setPositiveButton("بله", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("خیر", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
     @Override

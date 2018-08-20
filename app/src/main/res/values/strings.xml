@@ -42,5 +42,6 @@
     <string name="RID">کد گیرنده</string>
     <string name="sending_check_info">ارسال درخواست</string>
     <string name="sodour_date">تاریخ صدور</string>
+    <string name="title_activity_view_check_book">ViewCheckBook</string>
 
 </resources>
